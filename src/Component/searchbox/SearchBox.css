@@ -1,0 +1,24 @@
+/* SearchBox.css */
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .inputBase {
+    background-color: white;
+    color: black;
+    border-radius: 25px;
+    height: 40px;
+    font-size: 16px;
+    transform-origin: top right;
+    transition: transform 0.3s;
+  }
+  
+  .searchIcon, .notificationIcon {
+    cursor: pointer;
+    width: 2vw;
+    height: 4vh;
+  }
+  

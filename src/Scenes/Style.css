@@ -1,0 +1,48 @@
+.container{
+  min-height: 100vh;
+  max-width: 100vw;
+  background-color: #151515;
+  overflow: auto;
+}
+
+.app-container {
+  display: flex;
+    background-color: #151515;
+  }
+  .content
+  {
+    min-height: 100vh;
+    max-width: 200vw;
+    background-color: #151515;
+      flex-grow: 1;
+      height: 100vh;
+      overflow: auto;
+    
+  }
+  .sidebar {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+  }
+  
+  .sidebar-dark {
+    background-color: #0d0d0f;
+  }
+  
+  .sidebar-light {
+    background-color: #151515;
+    width: 5vw;
+  }
+  
+  .user-info {
+    color: white;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .avatar {
+    margin-left: 10px;
+  }

@@ -1,0 +1,56 @@
+
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 25vw;
+  }
+
+  .second-sidebar {
+    width: 20vw;
+  }
+}
+
+/* App.css */
+.pageStyles {
+  background-color: #111115;
+  min-height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+.sidebarStyles {
+  background-color: #151515;
+  width: 8vw;
+  padding: 16px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.logoStyles {
+  width: 3vw;
+  height: 6vh;
+  margin-bottom: 20px;
+}
+
+.iconList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.iconListItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.iconListItem:hover {
+  background-color: #1d1d1d;
+  border-radius: 10px;
+}
