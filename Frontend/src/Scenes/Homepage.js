@@ -43,21 +43,21 @@ const App = () => {
     <div className="app-container">
       {/* First Sidebar */}
       <div className="sidebar sidebar-light">
-      <img src={logo} alt="Logo" style={{   width: '35px', height: '40px', marginTop: '10px',marginRight:"20px",marginBottom:"20px"}}/>
+      <img src={logo} alt="Logo" style={{   width: '35px', height: '40px', marginTop: '10px',marginRight:"10px",marginBottom:"20px"}}/>
         <List>
           <ListItem>
-            <ListItemIcon>
-              <Home sx={{color:'white'}}/>
+            <ListItemIcon sx={{color:'white',marginLeft:"20px"}}>
+              <Home />
             </ListItemIcon>
           </ListItem>
           <ListItem>
-            <ListItemIcon>
-              <Inbox sx={{color:'white'}}/>
+            <ListItemIcon sx={{color:'white',marginLeft:"20px"}}>
+              <Inbox />
             </ListItemIcon>
           </ListItem>
           <ListItem>
-            <ListItemIcon>
-              <Mail sx={{color:'white'}}/>
+            <ListItemIcon sx={{color:'white',marginLeft:"20px"}}>
+              <Mail />
             </ListItemIcon>
           </ListItem>
         </List>
@@ -104,7 +104,7 @@ const App = () => {
               <ListItemText primary="More" sx={{textDecoration:'none',color:"white"}}/>
               </Link>
             </ListItem>
-            <div className='sidebar-dark-buttom'>
+            <div>
             <ListItem>
         <ListItemIcon>
           <SettingsIcon sx={{ color: 'white' }} />
@@ -129,7 +129,7 @@ const App = () => {
       <div className='content'>
         <Searchbar/>
         <Routes>
-        <Route path="/layout" element={<Layout />} />
+        <Route path="/live" element={<Layout />} />
       </Routes>
       </div>
     </div>

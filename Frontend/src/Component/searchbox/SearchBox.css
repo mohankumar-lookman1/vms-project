@@ -10,8 +10,8 @@
     background-color: white;
     color: black;
     border-radius: 25px;
-    height: 40px;
-    font-size: 16px;
+    height: 4vh;
+    font-size: 16vw;
     transform-origin: top right;
     transition: transform 0.3s;
   }

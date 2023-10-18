@@ -20,7 +20,7 @@
     
   }
   .sidebar {
-    padding: 10px;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,11 +29,14 @@
   
   .sidebar-dark {
     background-color: #0d0d0f;
+    width: 14vw;
+    padding: 5px;
   }
   
   .sidebar-light {
     background-color: #151515;
-    width: 5vw;
+    width: 4vw;
+    padding: 15px;
   }
   
   .user-info {

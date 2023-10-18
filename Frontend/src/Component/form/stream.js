@@ -90,17 +90,16 @@ const App = () => {
                 color="primary"
                 type="submit"
                 className="button"
-              >
+                sx={{ background: "red" ,marginLeft:"10px"}} >
                 Save Stream
               </Button>
               <span> </span>
-
               <Button
                 variant="contained"
                 color="primary"
                 onClick={() => setShowForm(false)}
                 className="button"
-              >
+                sx={{ background: "red",marginLeft:"20px" }} >
                 Cancel Stream
               </Button>
             </form>
