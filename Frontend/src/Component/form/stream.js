@@ -31,17 +31,23 @@ const App = () => {
     setStreamData({ streamName: "", streamType: "" });
     setSuccessMessage("Stream data saved successfully!");
   };
+  const handleFabClick = () => {
+    setShowForm(true);
+  };
 
+  const handleFabClose = () => {
+    setShowForm(false);
+  };
   return (
     <div>
-      <div className="container">
+        <div className="container">
         <Fab
           style={{
             position: "fixed",
             bottom: "30px",
             right: "30px",
           }}
-          onClick={() => setShowForm(true)}
+          onClick={showForm ? handleFabClose : handleFabClick} // Toggle showForm
         >
           <AddIcon />
         </Fab>
@@ -87,19 +93,19 @@ const App = () => {
 
               <Button
                 variant="contained"
-                color="primary"
+                color="error"
                 type="submit"
                 className="button"
-                sx={{ background: "red" ,marginLeft:"10px"}} >
+                sx={{background:'red',marginLeft:"10px"}} >
                 Save Stream
               </Button>
               <span> </span>
               <Button
                 variant="contained"
-                color="primary"
+                color="error"
                 onClick={() => setShowForm(false)}
                 className="button"
-                sx={{ background: "red",marginLeft:"20px" }} >
+                sx={{background:'red',marginLeft:"20px" }} >
                 Cancel Stream
               </Button>
             </form>
