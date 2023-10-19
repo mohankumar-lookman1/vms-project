@@ -8,6 +8,8 @@ import Searchbar from '../Component/searchbox/Searchbar';
 import Layout from '../Component/Layout/matrix';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import VideoStableIcon from '@mui/icons-material/VideoStable';
+import Record from '../Component/Recording/record';
 
 const App = () => {
   const [userData, setUserData] = useState({ name: '', avatar: '' });
@@ -87,7 +89,14 @@ const App = () => {
               <ListItemText primary="Layout" sx={{textDecoration:'none',color:"white"}}/>
              </Link>
             </ListItem>
-          
+            <ListItem>
+            <ListItemIcon>
+              <VideoStableIcon sx={{ color: 'white' }} />
+               </ListItemIcon>
+               <Link to="/recording">
+            <ListItemText primary="Recording" sx={{ textDecoration: 'none', color: 'white' }} />
+            </Link>
+            </ListItem>
             <ListItem>
               <ListItemIcon>
                 <Timeline sx={{color:'white'}}/>
@@ -130,7 +139,8 @@ const App = () => {
         <Searchbar/>
         <Routes>
         <Route path="/live" element={<Layout />} />
-      </Routes>
+        <Route path="/recording" element={<Record />} />
+        </Routes>
       </div>
     </div>
     </div>
