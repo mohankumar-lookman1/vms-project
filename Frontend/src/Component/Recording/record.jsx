@@ -17,6 +17,7 @@ const App = () => {
   const [dataAvailable, setDataAvailable] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const [content, setContent] = useState('');
 
   const isStep1Valid = startDate !== '' && endDate !== '' && endDate > startDate;
 
@@ -42,11 +43,28 @@ const App = () => {
     setActiveStep(activeStep - 1);
   };
 
-  const handleFetchData = () => {
-    // Here you can make an API request to fetch data based on the selected streamKey, startDate, endDate, startTime, and endTime.
-    // If data is available, set `dataAvailable` to true; otherwise, set it to false.
-    // For this example, let's assume data is available.
-    setDataAvailable(true);
+  const dummyApiData = {
+    stream1: {
+      dataAvailable: true,
+      content: "This is sample data for Stream 1.",
+    },
+    stream2: {
+      dataAvailable: false,
+      content: "Data not found for Stream 2.",
+    },
+    // Add data for other streams as needed
+  };
+  
+  const handleFetchData = async () => {
+    // Simulate fetching data from the dummy API based on the selected streamKey.
+    const response = dummyApiData[selectedStreamKey];
+    
+    if (response) {
+      const { dataAvailable, content } = response;
+      // Update the state based on the dummy API response.
+      setDataAvailable(dataAvailable);
+      setContent(content); // Set the content to be used in rendering.
+    }
   };
 
   return (
@@ -101,6 +119,9 @@ const App = () => {
                 onChange={(e) => setStartDate(e.target.value)}
                 type="date"
                 fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 className="text-field"
                 sx={{ marginBottom: "20px" }}
                 required
@@ -111,6 +132,9 @@ const App = () => {
                 onChange={(e) => setEndDate(e.target.value)}
                 type="date"
                 fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 className="text-field"
                 sx={{ marginBottom: "20px" }}
                 required
@@ -128,6 +152,9 @@ const App = () => {
                 onChange={(e) => setStartTime(e.target.value)}
                 type="time"
                 fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 sx={{ marginBottom: "20px" }}
               />
               <TextField
@@ -136,6 +163,9 @@ const App = () => {
                 onChange={(e) => setEndTime(e.target.value)}
                 type="time"
                 fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 className="text-field"
                 sx={{ marginBottom: "20px" }}
                 
@@ -167,13 +197,13 @@ const App = () => {
             )}
           </div>
           {dataAvailable ? (
-            <div>
-              <Typography>Data is available for {selectedStreamKey} from {startDate} {startTime} to {endDate} {endTime}</Typography>
-              {/* Add code to display fetched data */}
-            </div>
-          ) : (
-            <Typography>Data not found for {selectedStreamKey} from {startDate} {startTime} to {endDate} {endTime}</Typography>
-          )}
+  <div>
+    <Typography>Data is available for {selectedStreamKey} from {startDate} {startTime} to {endDate} {endTime}</Typography>
+    <Typography>{content}</Typography>
+  </div>
+) : (
+  <Typography>Data not found for {selectedStreamKey} from {startDate} {startTime} to {endDate} {endTime}</Typography>
+)}
         </DialogContent>
       </Dialog>
     </Container>
