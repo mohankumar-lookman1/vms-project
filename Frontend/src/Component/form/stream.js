@@ -16,10 +16,10 @@ import * as Yup from "yup";
 import "./styles.css";
 
 const validationSchema = Yup.object().shape({
-  cameraName: Yup.string().required("Camera Name is required"),
-  cameraIP: Yup.string().required("Camera IP is required"),
+  name: Yup.string().required("Camera Name is required"),
+  ip: Yup.string().required("Camera IP is required"),
   username: Yup.string().matches(/^[A-Za-z\s]+$/, "Only alphabetic characters are allowed").required("Username is required"),
-  password: Yup.string().matches(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/,/^[A-Za-z\s]+$/).required("Password is required"),
+  password: Yup.string().required("Password is required"),
 });
 
 const App = () => {
@@ -36,9 +36,9 @@ const App = () => {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      const response = await axios.post("http://192.168.1.52/stream", {
-        cameraName: values.cameraName,
-        cameraIP: values.cameraIP,
+      const response = await axios.post("http://192.168.1.52:3000/stream", {
+        name: values.name,
+        ip: values.ip,
         username: values.username,
         password: values.password,
       });
@@ -73,8 +73,8 @@ const App = () => {
           <CardContent>
             <Formik
               initialValues={{
-                cameraName: "",
-                cameraIP: "",
+                name: "",
+                ip: "",
                 username: "",
                 password: "",
               }}
@@ -83,7 +83,7 @@ const App = () => {
             >
               <Form>
                 <Typography>Stream Details</Typography>
-                <Field name="cameraName">
+                <Field name="name">
                   {({ field, form }) => (
                     <FormControl fullWidth>
                       <InputLabel >Camera Name</InputLabel>
@@ -91,9 +91,9 @@ const App = () => {
                         {...field}
                         required
                       />
-                      {form.touched.cameraName && form.errors.cameraName && (
+                      {form.touched.name && form.errors.name && (
                         <div className="error-message">
-                          {form.errors.cameraName}
+                          {form.errors.name}
                         </div>
                       )}
                     </FormControl>
@@ -102,7 +102,7 @@ const App = () => {
                 <br />
                 <br />
 
-                <Field name="cameraIP">
+                <Field name="ip">
                   {({ field, form }) => (
                     <FormControl fullWidth>
                       <InputLabel >Camera IP</InputLabel>
@@ -111,9 +111,9 @@ const App = () => {
                         required
                         
                       />
-                      {form.touched.cameraIP && form.errors.cameraIP && (
+                      {form.touched.ip && form.errors.ip && (
                         <div className="error-message">
-                          {form.errors.cameraIP}
+                          {form.errors.ip}
                         </div>
                       )}
                     </FormControl>
@@ -180,7 +180,6 @@ const App = () => {
                 </Button>
               </Form>
             </Formik>
-
 
             {successMessage && (
               <p style={{ color: "white" }}>{successMessage}</p>
