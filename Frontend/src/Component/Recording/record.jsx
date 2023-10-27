@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import VideoPlayer from './videoplayer';
-import videoUrls from '../../Data/source.json';
 import { Container, Grid, IconButton, Card, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent,  TextField, Alert } from '@mui/material';
 import WindowSharpIcon from '@mui/icons-material/WindowSharp';
 import ViewModuleSharpIcon from '@mui/icons-material/ViewModuleSharp';
 import ViewAgendaSharpIcon from '@mui/icons-material/ViewAgendaSharp';
 import './styles.css'; // Import the styles
+import axios from 'axios';
 
 const App = () => {
   const [numCols, setNumCols] = useState(3);
@@ -17,6 +17,7 @@ const App = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [content, setContent] = useState('');
+  const [videoUrls, setVideoUrls] = useState([]);
 
   const isStep1Valid = startDate !== '' && endDate !== '' && endDate > startDate;
 
@@ -34,6 +35,27 @@ const App = () => {
     setActiveStep(0);
   };
 
+  useEffect(() => {
+    axios.get('http://192.168.1.52:3000/available-ports')
+      .then(response => {
+        setVideoUrls(response.data.availablePorts);
+      })
+      .catch(error => {
+        console.error('Error fetching video URLs:', error);
+      });
+  }, []);
+
+  const handleFetchData = async () => {
+    // Simulate fetching data from the dummy API based on the selected streamKey.
+    const response = dummyApiData[selectedStreamKey];
+    
+    if (response) {
+      const { dataAvailable, content } = response;
+      // Update the state based on the dummy API response.
+      setDataAvailable(dataAvailable);
+      setContent(content); // Set the content to be used in rendering.
+    }
+  };
 
   const dummyApiData = {
     stream1: {
@@ -45,18 +67,6 @@ const App = () => {
       content: "Data not found for Stream 2.",
     },
     // Add data for other streams as needed
-  };
-  
-  const handleFetchData = async () => {
-    // Simulate fetching data from the dummy API based on the selected streamKey.
-    const response = dummyApiData[selectedStreamKey];
-    
-    if (response) {
-      const { dataAvailable, content } = response;
-      // Update the state based on the dummy API response.
-      setDataAvailable(dataAvailable);
-      setContent(content); // Set the content to be used in rendering.
-    }
   };
 
   return (
@@ -77,14 +87,14 @@ const App = () => {
       </div>
       <div>
         <Grid container spacing={2}>
-          {Object.keys(videoUrls).map((streamKey, index) => (
-            <Grid item xs={12 / Math.min(numCols, Object.keys(videoUrls).length)} key={index}>
-              <Card className="custom-card" style={{ backgroundColor: '#111115', color: 'white', cursor: 'pointer' }} onClick={() => handleCardClick(streamKey)}>
+          {videoUrls.map((videoUrl, index) => (
+            <Grid item xs={12 / Math.min(numCols, videoUrls.length)} key={index}>
+              <Card className="custom-card" style={{ backgroundColor: '#111115', color: 'white', cursor: 'pointer' }} onClick={() => handleCardClick(videoUrl)}>
                 <div className="video-container">
-                  <VideoPlayer streamKey={streamKey} />
+                  <VideoPlayer videoUrl={videoUrl} />
                 </div>
                 <CardContent>
-                  <Typography>{streamKey.toUpperCase()}</Typography>
+                  <Typography>{`Stream ${index + 1}`}</Typography>
                 </CardContent>
               </Card>
             </Grid>
@@ -105,7 +115,7 @@ const App = () => {
           shrink: true,
           style: { color: 'white' }
         }}
-        sx={{ marginBottom: "20px" }}
+        sx={{ marginBottom: "20px", }}
         required
       />
       <TextField

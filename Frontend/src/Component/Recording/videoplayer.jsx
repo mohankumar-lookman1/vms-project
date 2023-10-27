@@ -1,22 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import JSMpeg from '@cycjimmy/jsmpeg-player';
-import videoUrls from '../../Data/source.json';
 
-const VideoPlayer = ({ streamKey }) => {
+const VideoPlayer = ({ videoUrl }) => {
     const wrapper = useRef(null);
 
     useEffect(() => {
-        const url = videoUrls[streamKey];
-        const player = new JSMpeg.Player(url, {
-            canvas: wrapper.current,
-            autoplay: true,
-            videoBufferSize: 512 * 1024,
-            audioBufferSize: 128 * 1024,
-            controls: true,
-        });
-
-     
-    }, [streamKey]);
+        if (videoUrl && typeof videoUrl === 'string') { // Add this condition
+            new JSMpeg.Player(videoUrl, {
+                canvas: wrapper.current,
+                autoplay: true,
+                videoBufferSize: 512 * 1024,
+                audioBufferSize: 128 * 1024,
+                controls: true,
+            });
+        }
+    }, [videoUrl]);
 
     return (
         <div style={{ position: 'relative', paddingBottom: '56.25%', height: '0' }}>
