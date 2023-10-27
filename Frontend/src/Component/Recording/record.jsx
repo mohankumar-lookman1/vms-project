@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import VideoPlayer from './videoplayer';
 import videoUrls from '../../Data/source.json';
-import { Container, Grid, IconButton, Card, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, Stepper, Step, StepLabel, TextField, Alert } from '@mui/material';
+import { Container, Grid, IconButton, Card, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent,  TextField, Alert } from '@mui/material';
 import WindowSharpIcon from '@mui/icons-material/WindowSharp';
 import ViewModuleSharpIcon from '@mui/icons-material/ViewModuleSharp';
 import ViewAgendaSharpIcon from '@mui/icons-material/ViewAgendaSharp';
@@ -12,8 +12,7 @@ const App = () => {
   const [selectedStreamKey, setSelectedStreamKey] = useState(null);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
+  const [number, setNumber] = useState('');
   const [dataAvailable, setDataAvailable] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -35,13 +34,6 @@ const App = () => {
     setActiveStep(0);
   };
 
-  const handleNextStep = () => {
-    setActiveStep(activeStep + 1);
-  };
-
-  const handleBackStep = () => {
-    setActiveStep(activeStep - 1);
-  };
 
   const dummyApiData = {
     stream1: {
@@ -99,113 +91,78 @@ const App = () => {
           ))}
         </Grid>
       </div>
-
       <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>Stream Details</DialogTitle>
-        <DialogContent>
-          <Stepper activeStep={activeStep} alternativeLabel>
-            <Step key="SelectDates">
-              <StepLabel>Select Dates</StepLabel>
-            </Step>
-            <Step key="SelectTimes">
-              <StepLabel>Select Times</StepLabel>
-            </Step>
-          </Stepper>
-          {activeStep === 0 && (
-            <div>
-              <TextField
-                label="Start Date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                type="date"
-                fullWidth
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                className="text-field"
-                sx={{ marginBottom: "20px" }}
-                required
-              />
-              <TextField
-                label="End Date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                type="date"
-                fullWidth
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                className="text-field"
-                sx={{ marginBottom: "20px" }}
-                required
-              />
-              {!isStep1Valid && (
-                <Alert severity="error">Please fill in the required details and ensure that the end date is after the start date.</Alert>
-              )}
-            </div>
-          )}
-          {activeStep === 1 && (
-            <div>
-              <TextField
-                label="Start Time"
-                value={startTime}
-                onChange={(e) => setStartTime(e.target.value)}
-                type="time"
-                fullWidth
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                sx={{ marginBottom: "20px" }}
-              />
-              <TextField
-                label="End Time"
-                value={endTime}
-                onChange={(e) => setEndTime(e.target.value)}
-                type="time"
-                fullWidth
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                className="text-field"
-                sx={{ marginBottom: "20px" }}
-                
-              />
-              
-            </div>
-            
-          )}
-          <div>
-            {activeStep === 0 && (
-              <Button
-                onClick={isStep1Valid ? handleNextStep : () => alert('Please fill the required details and ensure that the end date is after the start date.')}
-                variant="contained"
-                
-                sx={{ marginLeft: "10px", marginBottom: "20px" }}
-              >
-                Next
-              </Button>
-            )}
-            {activeStep === 1 && (
-              <div>
-                <Button className="form-button" onClick={handleBackStep} variant="contained"  sx={{ marginLeft: "10px", marginBottom: "20px" }}>
-                  Back
-                </Button>
-                <Button className="form-button" onClick={handleFetchData} variant="contained" sx={{ marginLeft: "30px", marginBottom: "20px" }}>
-                  Fetch Data
-                </Button>
-              </div>
-            )}
-          </div>
-          {dataAvailable ? (
-  <div>
-    <Typography>Data is available for {selectedStreamKey} from {startDate} {startTime} to {endDate} {endTime}</Typography>
-    <Typography>{content}</Typography>
-  </div>
-) : (
-  <Typography>Data not found for {selectedStreamKey} from {startDate} {startTime} to {endDate} {endTime}</Typography>
-)}
-        </DialogContent>
-      </Dialog>
+  <DialogTitle sx={{ background: "#1c1919", color: "white" }}>Stream Details</DialogTitle>
+   <DialogContent sx={{ background: "#1c1919" }}>
+    <div>
+      <br/>
+    <TextField
+        label="Camera ID"
+        value={number}
+        onChange={(e) => setNumber(e.target.value)}
+        type="number"
+        fullWidth
+        InputLabelProps={{
+          shrink: true,
+          style: { color: 'white' }
+        }}
+        InputProps={{ style: { color: 'white' }}}
+        sx={{ marginBottom: "20px", }}
+        required
+      />
+      <TextField
+        label="Start Date"
+        value={startDate}
+        onChange={(e) => setStartDate(e.target.value)}
+        type="date"
+        fullWidth
+        InputLabelProps={{
+          shrink: true,
+          style: { color: 'white' }
+        }}
+        InputProps={{ style: { color: 'white' } }}
+        sx={{ marginBottom: "20px", color: "white" }}
+        required
+      />
+      <TextField
+        label="End Date"
+        value={endDate}
+        onChange={(e) => setEndDate(e.target.value)}
+        type="date"
+        fullWidth
+        InputLabelProps={{
+          shrink: true,
+          style: { color: 'white' }
+        }}
+        InputProps={{style: { color: 'white' }}}
+        sx={{ marginBottom: "20px", color: "white" }}
+        required
+      />
+   
+     
+      {!isStep1Valid && (
+        <Alert severity="error" sx={{ background: "#1c1919", color: "white" }}> Please fill in the required details and ensure that the end date is after the start date.</Alert>
+      )}
+    </div>
+    <div>
+      <Button
+        onClick={isStep1Valid ? handleFetchData : () => alert('Please fill the required details and ensure that the end date is after the start date.')}
+        sx={{ marginLeft: "10px", marginBottom: "20px", background: "black", color: "white" }}
+      >
+        Retrieve Data
+      </Button>
+    </div>
+    {dataAvailable ? (
+      <div>
+        <Typography style={{ color: "white" }}>Data is available for {selectedStreamKey} from {startDate} to {endDate} </Typography>
+        <Typography style={{ color: "white" }}>{content}</Typography>
+      </div>
+    ) : (
+      <Typography style={{ color: "white" }}>Data not found for {selectedStreamKey} from {startDate} to {endDate} </Typography>
+    )}
+  </DialogContent>
+</Dialog>
+
     </Container>
   );
 };

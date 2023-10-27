@@ -69,7 +69,7 @@ const App = () => {
       </div>
 
       {showForm && (
-        <Card className="card" >
+        <Card className="card"  sx={{background:"#1c1919",color:"white"}}>
           <CardContent>
             <Formik
               initialValues={{
@@ -81,12 +81,12 @@ const App = () => {
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
             >
-              <Form>
+              <Form  >
                 <Typography>Stream Details</Typography>
                 <Field name="name">
                   {({ field, form }) => (
                     <FormControl fullWidth>
-                      <InputLabel >Camera Name</InputLabel>
+                      <InputLabel sx={{color:"white"}} >Camera Name</InputLabel>
                       <Input
                         {...field}
                         required
@@ -105,7 +105,7 @@ const App = () => {
                 <Field name="ip">
                   {({ field, form }) => (
                     <FormControl fullWidth>
-                      <InputLabel >Camera IP</InputLabel>
+                      <InputLabel  sx={{color:"white"}} >Camera IP</InputLabel>
                       <Input
                         {...field}
                         required
@@ -125,7 +125,7 @@ const App = () => {
                 <Field name="username">
                   {({ field, form }) => (
                     <FormControl fullWidth>
-                      <InputLabel >Username</InputLabel>
+                      <InputLabel sx={{color:"white"}} >Username</InputLabel>
                       <Input
                         {...field}
                         required
@@ -141,10 +141,10 @@ const App = () => {
                 <br />
                 <br />
 
-                <Field name="password">
+                <Field name="password" >
                   {({ field, form }) => (
                     <FormControl fullWidth>
-                      <InputLabel >Password</InputLabel>
+                      <InputLabel sx={{color:"white"}} >Password</InputLabel>
                       <Input
                         {...field}
                         required
@@ -161,20 +161,18 @@ const App = () => {
                 <br />
 
                 <Button
-                  variant="contained"
-                  color="primary"
                   type="submit"
                   className="button"
-                  sx={{ marginLeft: "10px" }}
+                  sx={{ marginLeft: "30px" ,background:"black",color:"white"}}
                 >
                   Save Stream
                 </Button>
                 <span> </span>
                 <Button
-                  variant="contained"
-                  color="primary"
+                 
                   onClick={handleFabClose}
                   className="button"
+                  sx={{background:"black",color:"white"}}
                 >
                   Cancel Stream
                 </Button>
