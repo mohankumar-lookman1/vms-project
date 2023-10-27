@@ -94,7 +94,6 @@ const App = () => {
       <Dialog open={openDialog} onClose={handleCloseDialog}>
   <DialogTitle sx={{ background: "#1c1919", color: "white" }}>Stream Details</DialogTitle>
    <DialogContent sx={{ background: "#1c1919" }}>
-    <div>
       <br/>
     <TextField
         label="Camera ID"
@@ -106,8 +105,7 @@ const App = () => {
           shrink: true,
           style: { color: 'white' }
         }}
-        InputProps={{ style: { color: 'white' }}}
-        sx={{ marginBottom: "20px", }}
+        sx={{ marginBottom: "20px" }}
         required
       />
       <TextField
@@ -143,15 +141,12 @@ const App = () => {
       {!isStep1Valid && (
         <Alert severity="error" sx={{ background: "#1c1919", color: "white" }}> Please fill in the required details and ensure that the end date is after the start date.</Alert>
       )}
-    </div>
-    <div>
       <Button
         onClick={isStep1Valid ? handleFetchData : () => alert('Please fill the required details and ensure that the end date is after the start date.')}
         sx={{ marginLeft: "10px", marginBottom: "20px", background: "black", color: "white" }}
       >
         Retrieve Data
       </Button>
-    </div>
     {dataAvailable ? (
       <div>
         <Typography style={{ color: "white" }}>Data is available for {selectedStreamKey} from {startDate} to {endDate} </Typography>

@@ -36,7 +36,7 @@ const App = () => {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      const response = await axios.post("http://192.168.1.52:3000/stream", {
+      const response = await axios.post("http://192.168.1.52:3000/add-stream", {
         name: values.name,
         ip: values.ip,
         username: values.username,
