@@ -51,7 +51,7 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
                 style: { color: 'white' }
               }}
               InputProps={{
-                style: { color: 'white' }, // Set input text color to white
+                style: { color: 'white' }, 
               }}
               sx={{marginTop:"20px",color:"white"}}
             />
@@ -66,7 +66,7 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
                 style: { color: 'white' }
               }}
               InputProps={{
-                style: { color: 'white' }, // Set input text color to white
+                style: { color: 'white' }, 
               }}
               sx={{marginTop:"20px" }}
             />

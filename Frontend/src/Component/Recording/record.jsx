@@ -11,7 +11,8 @@ const App = () => {
   const [numCols, setNumCols] = useState(3);
   const [selectedStreamKey, setSelectedStreamKey] = useState(null);
   const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [number, setNumber] = useState('');
   const [dataAvailable, setDataAvailable] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
@@ -19,7 +20,7 @@ const App = () => {
   const [content, setContent] = useState('');
   const [videoUrls, setVideoUrls] = useState([]);
 
-  const isStep1Valid = startDate !== '' && endDate !== '' && endDate > startDate;
+  const isStep1Valid = startTime !== '' && endTime !== '' && endTime > startTime;
 
   const handleNumColsChange = (cols) => {
     setNumCols(cols);
@@ -106,15 +107,16 @@ const App = () => {
    <DialogContent sx={{ background: "#1c1919" }}>
       <br/>
     <TextField
-        label="Camera ID"
+        label="Camera Name"
         value={number}
         onChange={(e) => setNumber(e.target.value)}
-        type="number"
+        type="text"
         fullWidth
         InputLabelProps={{
           shrink: true,
           style: { color: 'white' }
         }}
+        InputProps={{ style: { color: 'white' } }}
         sx={{ marginBottom: "20px", }}
         required
       />
@@ -133,10 +135,10 @@ const App = () => {
         required
       />
       <TextField
-        label="End Date"
-        value={endDate}
-        onChange={(e) => setEndDate(e.target.value)}
-        type="date"
+        label="Starting Time"
+        value={startTime}
+        onChange={(e) => setStartTime(e.target.value)}
+        type="time"
         fullWidth
         InputLabelProps={{
           shrink: true,
@@ -146,24 +148,37 @@ const App = () => {
         sx={{ marginBottom: "20px", color: "white" }}
         required
       />
-   
+       <TextField
+        label="Ending Time"
+        value={endTime}
+        onChange={(e) => setEndTime(e.target.value)}
+        type="time"
+        fullWidth
+        InputLabelProps={{
+          shrink: true,
+          style: { color: 'white' }
+        }}
+        InputProps={{style: { color: 'white' }}}
+        sx={{ marginBottom: "20px", color: "white" }}
+        required
+      />
      
       {!isStep1Valid && (
         <Alert severity="error" sx={{ background: "#1c1919", color: "white" }}> Please fill in the required details and ensure that the end date is after the start date.</Alert>
       )}
       <Button
-        onClick={isStep1Valid ? handleFetchData : () => alert('Please fill the required details and ensure that the end date is after the start date.')}
+        onClick={isStep1Valid ? handleFetchData : () => alert('Please fill the required details and ensure that to give a proper timeing .')}
         sx={{ marginLeft: "10px", marginBottom: "20px", background: "black", color: "white" }}
       >
         Retrieve Data
       </Button>
     {dataAvailable ? (
       <div>
-        <Typography style={{ color: "white" }}>Data is available for {selectedStreamKey} from {startDate} to {endDate} </Typography>
+        <Typography style={{ color: "white" }}>Data is available for {selectedStreamKey} from {startDate} to {startTime} </Typography>
         <Typography style={{ color: "white" }}>{content}</Typography>
       </div>
     ) : (
-      <Typography style={{ color: "white" }}>Data not found for {selectedStreamKey} from {startDate} to {endDate} </Typography>
+      <Typography style={{ color: "white" }}>Data not found for {selectedStreamKey} from {startDate} to {endTime} </Typography>
     )}
   </DialogContent>
 </Dialog>

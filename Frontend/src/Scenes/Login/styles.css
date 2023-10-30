@@ -10,8 +10,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 400px;
-    width: 100%;
+   
+    width: 60vw;
     padding: 16px;
     box-sizing: border-box;
     background-color: black;

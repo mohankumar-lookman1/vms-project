@@ -126,7 +126,7 @@ const App = () => {
         <ListItemIcon>
           <ExitToAppIcon sx={{ color: 'white' }} />
         </ListItemIcon>
-        <Link to="/logout">
+        <Link to="/login">
           <ListItemText primary="Logout" sx={{ textDecoration: 'none', color: 'white' }} />
         </Link>
       </ListItem>
