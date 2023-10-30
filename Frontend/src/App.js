@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Login from './Scenes/Login/loginform';
-import Signin from './Scenes/signin/signinform';
-import Homepage from './Scenes/Homepage/Homepage';
+import Signup from './Scenes/signin/signinform';
+import HomePage from './Scenes/Homepage/Homepage';
+
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [showSignin, setShowSignin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   const handleLogin = () => {
     // Implement your authentication logic here
@@ -13,28 +14,24 @@ const App = () => {
     setIsAuthenticated(true);
   };
 
-  const handleSignin = () => {
-    // Callback function to navigate to the homepage after successful Signin
+  const handleSignup = () => {
+    // Callback function to navigate to the homepage after successful signup
     setIsAuthenticated(true);
-    setShowSignin(false);
-  };
-
-  const handleLogout = () => {
-    // Implement your logout logic here
-    // Set isAuthenticated to false
-    setIsAuthenticated(false);
+    setShowSignup(false);
   };
 
   return (
-    <div>
-      {isAuthenticated ? (
-        <Homepage onLogout={handleLogout} />
-      ) : showSignin ? (
-        <Signin onSignin={handleSignin} onSwitchToLogin={() => setShowSignin(false)} />
-      ) : (
-        <Login onLogin={handleLogin} onSwitchToSignin={() => setShowSignin(true)} />
-      )}
-    </div>
+   
+      <div>
+          {isAuthenticated ? (
+            <div><HomePage /> </div>
+          ) : showSignup ? (
+            <Signup onSignup={handleSignup} onSwitchToLogin={() => setShowSignup(false)} />
+          ) : (
+            <Login onLogin={handleLogin} onSwitchToSignup={() => setShowSignup(true)} />
+          )}
+     </div>
+  
   );
 };
 

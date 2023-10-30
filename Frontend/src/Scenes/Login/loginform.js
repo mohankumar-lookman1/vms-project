@@ -8,6 +8,7 @@ import {
   Link,
 
 } from '@mui/material';
+import './styles.css'
 
 const Login = ({ onLogin, onSwitchToSignup }) => {
   const [email, setMail] = useState('');
@@ -77,7 +78,7 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
               color="primary"
               fullWidth
               onClick={handleLogin}
-              sx={{ height: "5vh", width: "10vw", marginLeft: "100px", marginTop: "20px" }}
+              sx={{ height: "5vh", width: "10vw", marginTop:"20px"}}
             >
               Login
             </Button>

@@ -7,6 +7,7 @@ import {
   TextField,
   Link,
 } from '@mui/material';
+import "./styles.css";
 
 const Signup = ({ onSignup, onSwitchToLogin }) => {
   const [username, setUsername] = useState('');
@@ -91,7 +92,7 @@ const Signup = ({ onSignup, onSwitchToLogin }) => {
           color="primary"
           fullWidth
           onClick={handleSignup}
-          sx={{ height: "5vh", width: "10vw", marginLeft: "100px", marginTop: "20px" }}
+          sx={{ height: "8vh", width: "15vw",  marginTop: "20px" }}
       
         >
           Sign In
