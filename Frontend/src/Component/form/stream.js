@@ -163,11 +163,10 @@ const App = () => {
                 <Button
                   type="submit"
                   className="button"
-                  sx={{ marginLeft: "30px" ,background:"black",color:"white"}}
+                  sx={{ marginLeft: "5px" ,background:"black",color:"white"}}
                 >
                   Save Stream
                 </Button>
-                <span> </span>
                 <Button
                  
                   onClick={handleFabClose}
