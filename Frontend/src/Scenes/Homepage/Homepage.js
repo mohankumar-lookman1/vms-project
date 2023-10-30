@@ -3,13 +3,14 @@ import { List, ListItem, ListItemIcon, Avatar, ListItemText } from '@mui/materia
 import { Home, Inbox, Mail, LiveTv, ViewComfy, Timeline, MoreHoriz } from '@mui/icons-material';
 import './Style.css';  
 import { Link,Routes,Route } from 'react-router-dom';
-import logo from '../assets/secura.png';
-import Searchbar from '../Component/searchbox/Searchbar';
-import Layout from '../Component/Layout/matrix';
+import logo from '../../assets/secura.png';
+import Searchbar from '../../Component/searchbox/Searchbar';
+import Layout from '../../Component/Layout/matrix';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import VideoStableIcon from '@mui/icons-material/VideoStable';
-import Record from '../Component/Recording/record';
+import Record from '../../Component/Recording/record';
+
 
 const App = () => {
   const [userData, setUserData] = useState({ name: '', avatar: '' });
