@@ -121,7 +121,7 @@ const App = () => {
         required
       />
       <TextField
-        label="Start Date"
+        label=" Date"
         value={startDate}
         onChange={(e) => setStartDate(e.target.value)}
         type="date"
