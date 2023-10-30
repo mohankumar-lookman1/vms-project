@@ -5,7 +5,7 @@ import './Style.css';
 import { Link,Routes,Route } from 'react-router-dom';
 import logo from '../../assets/secura.png';
 import Searchbar from '../../Component/searchbox/Searchbar';
-import Layout from '../../Component/Layout/matrix';
+import Layout from '../../Component/Live/finallive';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import VideoStableIcon from '@mui/icons-material/VideoStable';

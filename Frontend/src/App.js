@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Login from './Scenes/Login/loginform';
-import Signup from './Scenes/signin/signinform';
+import Signin from './Scenes/signin/signinform';
 import Homepage from './Scenes/Homepage/Homepage';
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
   };
 
   const handleSignin = () => {
-    // Callback function to navigate to the homepage after successful signup
+    // Callback function to navigate to the homepage after successful Signin
     setIsAuthenticated(true);
     setShowSignin(false);
   };
@@ -30,7 +30,7 @@ const App = () => {
       {isAuthenticated ? (
         <Homepage onLogout={handleLogout} />
       ) : showSignin ? (
-        <Signup onSignup={handleSignin} onSwitchToLogin={() => setShowSignin(false)} />
+        <Signin onSignin={handleSignin} onSwitchToLogin={() => setShowSignin(false)} />
       ) : (
         <Login onLogin={handleLogin} onSwitchToSignin={() => setShowSignin(true)} />
       )}
