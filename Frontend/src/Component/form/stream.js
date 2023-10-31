@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Card,
@@ -6,30 +6,51 @@ import {
   Fab,
   FormControl,
   InputLabel,
-  Input
+  Input,
+  Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import "./styles.css"; // Import the CSS file
+import axios from "axios";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import "./styles.css";
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required("Camera Name is required"),
+  ip: Yup.string().required("Camera IP is required"),
+  username: Yup.string().matches(/^[A-Za-z\s]+$/, "Only alphabetic characters are allowed").required("Username is required"),
+  password: Yup.string().required("Password is required"),
+});
 
 const App = () => {
-  const [showForm, setShowForm] = useState(false);
-  const [streamData, setStreamData] = useState({
-    streamName: "",
-    streamType: "",
-  });
-  const [successMessage, setSuccessMessage] = useState("");
+  const [showForm, setShowForm] = React.useState(false);
+  const [successMessage, setSuccessMessage] = React.useState("");
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  const handleFabClick = () => {
+    setShowForm(true);
+  };
 
-    // Save data to localStorage
-    const savedData = JSON.parse(localStorage.getItem("streamData")) || [];
-    savedData.push(streamData);
-    localStorage.setItem("streamData", JSON.stringify(savedData));
+  const handleFabClose = () => {
+    setShowForm(false);
+  };
 
-    // Reset the form and show success message
-    setStreamData({ streamName: "", streamType: "" });
-    setSuccessMessage("Stream data saved successfully!");
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      const response = await axios.post("http://192.168.1.52:3000/add-stream", {
+        name: values.name,
+        ip: values.ip,
+        username: values.username,
+        password: values.password,
+      });
+
+      if (response.status === 200) {
+        setSuccessMessage("Data stored successfully");
+        resetForm();
+      }
+    } catch (error) {
+      console.error("Error storing data:", error);
+      setSuccessMessage("Error storing data");
+    }
   };
 
   return (
@@ -41,77 +62,130 @@ const App = () => {
             bottom: "30px",
             right: "30px",
           }}
-          onClick={() => setShowForm(true)}
+          onClick={showForm ? handleFabClose : handleFabClick}
         >
           <AddIcon />
         </Fab>
       </div>
 
       {showForm && (
-        <Card className="card" sx={{ backgroundColor: "black" }}>
+        <Card className="card"  sx={{background:"#1c1919",color:"white"}}>
           <CardContent>
-            <form onSubmit={handleFormSubmit}>
-              <FormControl fullWidth>
-                <InputLabel sx={{ color: "white" }}>Stream Name</InputLabel>
-                <Input
-                  required
-                  value={streamData.streamName}
-                  onChange={(e) =>
-                    setStreamData({
-                      ...streamData,
-                      streamName: e.target.value,
-                    })
-                  }
-                  sx={{ color: "white" }} // Set input text color
-                />
-              </FormControl>
-              <br />
-              <br />
+            <Formik
+              initialValues={{
+                name: "",
+                ip: "",
+                username: "",
+                password: "",
+              }}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+            >
+              <Form  >
+                <Typography>Stream Details</Typography>
+                <Field name="name">
+                  {({ field, form }) => (
+                    <FormControl fullWidth>
+                      <InputLabel sx={{color:"white"}} >Camera Name</InputLabel>
+                      <Input
+                        {...field}
+                        required
+                      />
+                      {form.touched.name && form.errors.name && (
+                        <div className="error-message">
+                          {form.errors.name}
+                        </div>
+                      )}
+                    </FormControl>
+                  )}
+                </Field>
+                <br />
+                <br />
 
-              <FormControl fullWidth className="form-control">
-                <InputLabel sx={{ color: "white" }}>Stream URL</InputLabel>
-                <Input
-                  required
-                  value={streamData.streamUrl}
-                  onChange={(e) =>
-                    setStreamData({
-                      ...streamData,
-                      streamUrl: e.target.value,
-                    })
-                  }
-                  sx={{ color: "white" }} // Set input text color
-                />
-              </FormControl>
-              <br />
-              <br />
+                <Field name="ip">
+                  {({ field, form }) => (
+                    <FormControl fullWidth>
+                      <InputLabel  sx={{color:"white"}} >Camera IP</InputLabel>
+                      <Input
+                        {...field}
+                        required
+                        
+                      />
+                      {form.touched.ip && form.errors.ip && (
+                        <div className="error-message">
+                          {form.errors.ip}
+                        </div>
+                      )}
+                    </FormControl>
+                  )}
+                </Field>
+                <br />
+                <br />
 
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                className="button"
-                sx={{ background: "red" ,marginLeft:"10px"}} >
-                Save Stream
-              </Button>
-              <span> </span>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => setShowForm(false)}
-                className="button"
-                sx={{ background: "red",marginLeft:"20px" }} >
-                Cancel Stream
-              </Button>
-            </form>
+                <Field name="username">
+                  {({ field, form }) => (
+                    <FormControl fullWidth>
+                      <InputLabel sx={{color:"white"}} >Username</InputLabel>
+                      <Input
+                        {...field}
+                        required
+                      />
+                      {form.touched.username && form.errors.username && (
+                        <div className="error-message">
+                          {form.errors.username}
+                        </div>
+                      )}
+                    </FormControl>
+                  )}
+                </Field>
+                <br />
+                <br />
+
+                <Field name="password" >
+                  {({ field, form }) => (
+                    <FormControl fullWidth>
+                      <InputLabel sx={{color:"white"}} >Password</InputLabel>
+                      <Input
+                        {...field}
+                        required
+                      />
+                      {form.touched.password && form.errors.password && (
+                        <div className="error-message">
+                          {form.errors.password}
+                        </div>
+                      )}
+                    </FormControl>
+                  )}
+                </Field>
+                <br />
+                <br />
+
+                <Button
+                  type="submit"
+                  className="button"
+                  sx={{ marginLeft: "5px" ,background:"black",color:"white"}}
+                >
+                  Save Stream
+                </Button>
+                <Button
+                 
+                  onClick={handleFabClose}
+                  className="button"
+                  sx={{background:"black",color:"white"}}
+                >
+                  Cancel Stream
+                </Button>
+              </Form>
+            </Formik>
+
+            {successMessage && (
+              <p style={{ color: "white" }}>{successMessage}</p>
+            )}
           </CardContent>
         </Card>
       )}
 
-      {successMessage && (
-        <Card className="card">
-          <CardContent>{successMessage}</CardContent>
-        </Card>
-      )}
+      
     </div>
   );
 };

@@ -7,7 +7,6 @@
 
 .card {
   position: fixed;
-  color:white;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -15,15 +14,12 @@
   width: 100%;
   padding: 16px;
   box-sizing: border-box;
+  background-color: black;
+  color: white;/* Set card text color */
 }
 
 
 
 .form-control {
   margin-bottom: 16px;
-}
-
-.button {
-  margin-right: 8px;
-  
 }

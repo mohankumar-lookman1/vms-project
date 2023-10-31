@@ -3,13 +3,18 @@ import { List, ListItem, ListItemIcon, Avatar, ListItemText } from '@mui/materia
 import { Home, Inbox, Mail, LiveTv, ViewComfy, Timeline, MoreHoriz } from '@mui/icons-material';
 import './Style.css';  
 import { Link,Routes,Route } from 'react-router-dom';
-import logo from '../assets/secura.png';
-import Searchbar from '../Component/searchbox/Searchbar';
-import Layout from '../Component/Layout/matrix';
+import logo from '../../assets/secura.png';
+import Searchbar from '../../Component/searchbox/Searchbar';
+import Layout from '../../Component/Live/finallive';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import VideoStableIcon from '@mui/icons-material/VideoStable';
+<<<<<<< HEAD:Frontend/src/Scenes/Homepage.js
 import Record from '../Component/Recording/record';
+=======
+import Record from '../../Component/Recording/record';
+
+>>>>>>> 28153e93304a09767a9c7589d35f25cddf573f5b:Frontend/src/Scenes/Homepage/Homepage.js
 
 const App = () => {
   const [userData, setUserData] = useState({ name: '', avatar: '' });
@@ -133,7 +138,7 @@ const App = () => {
         <ListItemIcon>
           <ExitToAppIcon sx={{ color: 'white' }} />
         </ListItemIcon>
-        <Link to="/logout">
+        <Link to="/login">
           <ListItemText primary="Logout" sx={{ textDecoration: 'none', color: 'white' }} />
         </Link>
       </ListItem>

@@ -9,7 +9,7 @@
 }
 
 .icon-button {
-  color: #000;
+  color: #fff;
 }
 
 .custom-card {
@@ -37,4 +37,13 @@
   position: fixed;
   bottom: 16px;
   right: 16px;
+}
+.form-button {
+  margin-top: 10px; /* Adjust the margin to your desired spacing */
+}
+
+/* Add spacing between input fields */
+.text-field {
+  margin-bottom: 10px;
+  color: white; /* Adjust the margin to your desired spacing */
 }
