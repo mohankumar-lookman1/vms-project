@@ -8,6 +8,8 @@ import Searchbar from '../Component/searchbox/Searchbar';
 import Layout from '../Component/Layout/matrix';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import VideoStableIcon from '@mui/icons-material/VideoStable';
+import Record from '../Component/Recording/record';
 
 const App = () => {
   const [userData, setUserData] = useState({ name: '', avatar: '' });
@@ -28,9 +30,16 @@ const App = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+        const response = await fetch('http://192.168.1.52:3000/auth/login');
         const data = await response.json();
-        setUserData(data);
+
+        // Assuming the new API has the user name under the key 'userName'
+        const updatedUserData = {
+          name: data.userName,
+          avatar: userData.avatar,
+        };
+
+        setUserData(updatedUserData);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -87,7 +96,14 @@ const App = () => {
               <ListItemText primary="Layout" sx={{textDecoration:'none',color:"white"}}/>
              </Link>
             </ListItem>
-          
+            <ListItem>
+            <ListItemIcon>
+              <VideoStableIcon sx={{ color: 'white' }} />
+               </ListItemIcon>
+               <Link to="/recording">
+            <ListItemText primary="Recording" sx={{ textDecoration: 'none', color: 'white' }} />
+            </Link>
+            </ListItem>
             <ListItem>
               <ListItemIcon>
                 <Timeline sx={{color:'white'}}/>
@@ -130,7 +146,8 @@ const App = () => {
         <Searchbar/>
         <Routes>
         <Route path="/live" element={<Layout />} />
-      </Routes>
+        <Route path="/recording" element={<Record />} />
+        </Routes>
       </div>
     </div>
     </div>
