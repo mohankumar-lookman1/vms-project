@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
-=======
 import Login from './Scenes/Login/loginform';
 import Signup from './Scenes/signin/signinform';
 import HomePage from './Scenes/Homepage/Homepage';
->>>>>>> 28153e93304a09767a9c7589d35f25cddf573f5b
 
-import HomePage from './Scenes/Homepage'
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -27,11 +23,6 @@ const App = () => {
   return (
    
       <div>
-<<<<<<< HEAD
-          
-            <div><HomePage/></div>
-       
-=======
           {isAuthenticated ? (
             <div><HomePage /> </div>
           ) : showSignup ? (
@@ -39,7 +30,6 @@ const App = () => {
           ) : (
             <Login onLogin={handleLogin} onSwitchToSignup={() => setShowSignup(true)} />
           )}
->>>>>>> 28153e93304a09767a9c7589d35f25cddf573f5b
      </div>
   
   );

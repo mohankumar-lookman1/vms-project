@@ -20,16 +20,17 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
       // Replace with your API endpoint for login
       const response = await fetch('http://192.168.1.52:3000/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+          headers: {
+            'Content-Type': 'application/json',
+          },
         body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
+        console.log(response)
         onLogin(); // Call the callback to set isAuthenticated to true
       } else {
-        setError('Invalid username or password');
+        setError('Invalid username and password');
       }
     } catch (error) {
       console.error('API request error:', error);

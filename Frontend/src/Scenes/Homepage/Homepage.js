@@ -9,12 +9,8 @@ import Layout from '../../Component/Live/finallive';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import VideoStableIcon from '@mui/icons-material/VideoStable';
-<<<<<<< HEAD:Frontend/src/Scenes/Homepage.js
-import Record from '../Component/Recording/record';
-=======
 import Record from '../../Component/Recording/record';
 
->>>>>>> 28153e93304a09767a9c7589d35f25cddf573f5b:Frontend/src/Scenes/Homepage/Homepage.js
 
 const App = () => {
   const [userData, setUserData] = useState({ name: '', avatar: '' });
@@ -35,22 +31,26 @@ const App = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('http://192.168.1.52:3000/auth/login');
-        const data = await response.json();
+        const response = await fetch('http://192.168.1.52:3000/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ /* send any necessary data for authentication here */ }),
+        });
 
-        // Assuming the new API has the user name under the key 'userName'
-        const updatedUserData = {
-          name: data.userName,
-          avatar: userData.avatar,
-        };
-
-        setUserData(updatedUserData);
+        if (response.ok) {
+          const data = await response.json();
+          setUserData(data); // Store the user data in state
+        }
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('API request is error:', error);
       }
     };
+
     fetchUserData();
   }, []);
+
 
   return (
     <div classname="container">
@@ -160,4 +160,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App; 

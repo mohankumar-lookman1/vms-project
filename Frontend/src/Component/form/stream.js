@@ -4,9 +4,7 @@ import {
   Card,
   CardContent,
   Fab,
-  FormControl,
-  InputLabel,
-  Input,
+  TextField,
   Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -83,87 +81,85 @@ const App = () => {
             >
               <Form  >
                 <Typography>Stream Details</Typography>
+                <br/>
                 <Field name="name">
-                  {({ field, form }) => (
-                    <FormControl fullWidth>
-                      <InputLabel sx={{color:"white"}} >Camera Name</InputLabel>
-                      <Input
-                        {...field}
-                        required
-                      />
-                      {form.touched.name && form.errors.name && (
-                        <div className="error-message">
-                          {form.errors.name}
-                        </div>
-                      )}
-                    </FormControl>
-                  )}
-                </Field>
+               {({ field, form }) => (
+              <TextField
+               {...field}
+               fullWidth
+               label="Camera Name"
+               sx={{ color: 'white' }}
+               required
+               InputLabelProps={{
+               style: { color: 'white' } }}
+               InputProps={{ style: { color: 'white' }}}
+               error={form.touched.name && !!form.errors.name}
+               helperText={form.touched.name ? form.errors.name : ''}  />
+               )}
+              </Field>
                 <br />
-                <br />
-
-                <Field name="ip">
-                  {({ field, form }) => (
-                    <FormControl fullWidth>
-                      <InputLabel  sx={{color:"white"}} >Camera IP</InputLabel>
-                      <Input
-                        {...field}
-                        required
-                        
-                      />
-                      {form.touched.ip && form.errors.ip && (
-                        <div className="error-message">
-                          {form.errors.ip}
-                        </div>
-                      )}
-                    </FormControl>
-                  )}
-                </Field>
+                <br/>
+              <Field name="ip">
+                {({ field, form }) => (
+               <TextField
+               {...field}
+               fullWidth
+               label="Camera IP"
+               sx={{ color: 'white' }}
+               required
+               InputLabelProps={{
+               style: { color: 'white' } }}
+               InputProps={{ style: { color: 'white' }}}
+               error={form.touched.ip && !!form.errors.ip}
+               helperText={form.touched.ip ? form.errors.ip : ''} />
+               )}
+              </Field>
                 <br />
                 <br />
 
                 <Field name="username">
-                  {({ field, form }) => (
-                    <FormControl fullWidth>
-                      <InputLabel sx={{color:"white"}} >Username</InputLabel>
-                      <Input
-                        {...field}
-                        required
-                      />
-                      {form.touched.username && form.errors.username && (
-                        <div className="error-message">
-                          {form.errors.username}
-                        </div>
-                      )}
-                    </FormControl>
-                  )}
-                </Field>
+                {({ field, form }) => (
+                   <TextField
+                   {...field}
+                   fullWidth
+                   label="Username"
+                   sx={{ color: 'white' }}
+                   required
+                   InputLabelProps={{
+                   style: { color: 'white' }
+                    }}
+                   InputProps={{ style: { color: 'white' }}}
+                   error={form.touched.username && !!form.errors.username}
+                   helperText={form.touched.username ? form.errors.username : ''}/>
+                    )}
+                  </Field>
                 <br />
                 <br />
 
-                <Field name="password" >
-                  {({ field, form }) => (
-                    <FormControl fullWidth>
-                      <InputLabel sx={{color:"white"}} >Password</InputLabel>
-                      <Input
-                        {...field}
-                        required
-                      />
-                      {form.touched.password && form.errors.password && (
-                        <div className="error-message">
-                          {form.errors.password}
-                        </div>
-                      )}
-                    </FormControl>
-                  )}
-                </Field>
+                <Field name="password">
+                   {({ field, form }) => (
+                    <TextField
+                   {...field}
+                   fullWidth
+                   label="Password"
+                   type="password"
+                   sx={{ color: 'white' }}
+                   required
+                   InputLabelProps={{
+                   style: { color: 'white' }
+                   }}
+                   InputProps={{ style: { color: 'white' }}}
+                   error={form.touched.password && !!form.errors.password}
+                   helperText={form.touched.password ? form.errors.password : ''} />
+                    )}
+                  </Field>
                 <br />
                 <br />
 
                 <Button
                   type="submit"
                   className="button"
-                  sx={{ marginLeft: "5px" ,background:"black",color:"white"}}
+                  sx={{ background:"black",color:"white"}}
                 >
                   Save Stream
                 </Button>
@@ -171,7 +167,7 @@ const App = () => {
                  
                   onClick={handleFabClose}
                   className="button"
-                  sx={{background:"black",color:"white"}}
+                  sx={{background:"black",color:"white", width:"13vw",marginLeft:"10px"}}
                 >
                   Cancel Stream
                 </Button>

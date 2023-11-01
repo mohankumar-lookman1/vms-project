@@ -27,6 +27,7 @@ const Signup = ({ onSignup, onSwitchToLogin }) => {
       });
 
       if (response.ok) {
+        console.log(response)
         onSignup(); 
       } else {
         setError('Failed to create an account');
