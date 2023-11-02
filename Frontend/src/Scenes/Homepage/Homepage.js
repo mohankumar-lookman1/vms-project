@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { List, ListItem, ListItemIcon, Avatar, ListItemText, Box } from '@mui/material';
-import { Home, Inbox, Mail, LiveTv, ViewComfy, Timeline, MoreHoriz } from '@mui/icons-material';
+import { Home, Inbox, Mail, LiveTv,  Timeline, MoreHoriz } from '@mui/icons-material';
 import './Style.css';
 import { Link, Routes, Route } from 'react-router-dom';
 import logo from '../../assets/secura.png';
@@ -11,8 +11,10 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import VideoStableIcon from '@mui/icons-material/VideoStable';
 import Record from '../../Component/Recording/record';
 
+
 const App = ({ response }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,6 +31,15 @@ const App = ({ response }) => {
   // Extract the first letter of the username
   const nameParts = response.username.split(' '); // Split by space
   const firstLetters = nameParts.map((name) => name.charAt(0).toUpperCase()); // Extract and capitalize
+
+  const handleLogout = () => {
+    // Perform your logout logic here (e.g., clearing user session, etc.)
+  
+    // Redirect to the login page
+    window.location.href = '/login';
+  };
+  
+  
 
 
 
@@ -81,14 +92,6 @@ const App = ({ response }) => {
               </ListItem>
               <ListItem>
                 <ListItemIcon>
-                  <ViewComfy sx={{ color: 'white' }} />
-                </ListItemIcon>
-                <Link to="/layout">
-                  <ListItemText primary="Layout" sx={{ textDecoration: 'none', color: 'white' }} />
-                </Link>
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
                   <VideoStableIcon sx={{ color: 'white' }} />
                 </ListItemIcon>
                 <Link to="/recording">
@@ -111,7 +114,8 @@ const App = ({ response }) => {
                   <ListItemText primary="More" sx={{ textDecoration: 'none', color: 'white' }} />
                 </Link>
               </ListItem>
-              <div>
+              
+              <div className='sidebar-down'>
                 <ListItem>
                   <ListItemIcon>
                     <SettingsIcon sx={{ color: 'white' }} />
@@ -124,7 +128,7 @@ const App = ({ response }) => {
                   <ListItemIcon>
                     <ExitToAppIcon sx={{ color: 'white' }} />
                   </ListItemIcon>
-                  <Link to="/login">
+                  <Link to="#" onClick={handleLogout}>
                     <ListItemText primary="Logout" sx={{ textDecoration: 'none', color: 'white' }} />
                   </Link>
                 </ListItem>
