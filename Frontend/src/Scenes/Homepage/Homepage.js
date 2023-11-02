@@ -12,8 +12,8 @@ import VideoStableIcon from '@mui/icons-material/VideoStable';
 import Record from '../../Component/Recording/record';
 
 
-const App = () => {
-  const [userData, setUserData] = useState({ name: '', avatar: '' });
+const App = ({response}) => {
+  //const [userData, setUserData] = useState({ name: '', avatar: '' });
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -28,28 +28,7 @@ const App = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch('http://192.168.1.52:3000/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ /* send any necessary data for authentication here */ }),
-        });
 
-        if (response.ok) {
-          const data = await response.json();
-          setUserData(data); // Store the user data in state
-        }
-      } catch (error) {
-        console.error('API request is error:', error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
 
 
   return (
@@ -81,8 +60,9 @@ const App = () => {
       {windowWidth > 600 && (
         <div className="sidebar sidebar-dark">
           <div className="user-info">
-            <div>{userData.name}</div>
-            <Avatar src={userData.avatar} alt="User Avatar" className="avatar" />
+            <div> {response.username&& <p>{response.username}</p>}
+             </div>
+            <Avatar  alt="User Avatar" className="avatar" />
           </div>
           <List>
             <ListItem>

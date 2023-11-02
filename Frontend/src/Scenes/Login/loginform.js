@@ -6,56 +6,46 @@ import {
   Button,
   TextField,
   Link,
-
 } from '@mui/material';
-import './styles.css'
+import "./styles.css";
+import { loginUser } from '../../Component/Reusable/api'; // Import the API function
 
 const Login = ({ onLogin, onSwitchToSignup }) => {
-  const [email, setMail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleLogin = async () => {
-    try {
-      // Replace with your API endpoint for login
-      const response = await fetch('http://192.168.1.52:3000/auth/login', {
-        method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        body: JSON.stringify({ email, password }),
-      });
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
 
-      if (response.ok) {
-        console.log(response)
-        onLogin(); // Call the callback to set isAuthenticated to true
-      } else {
-        setError('Invalid username and password');
-      }
+    try {
+      const responseData = await loginUser(email, password);
+      onLogin(responseData);
     } catch (error) {
-      console.error('API request error:', error);
-      setError('An error occurred during login');
+      setError(error.message);
     }
   };
 
   return (
-      <div className='container'>
-        <Card className='card' sx={{ backgroundColor: "#1c1919", color: "white" }}>
-          <CardContent>
-            <Typography variant="h4">Login</Typography>
+    <div className='container'>
+      <Card className='card' sx={{ backgroundColor: "#1c1919", color: "white" }}>
+        <CardContent>
+          <Typography variant="h4">Login</Typography>
+          <form onSubmit={handleSubmit}>
             <TextField
               label="Email"
+              type="email"
               variant="outlined"
-              fullWidth  
+              fullWidth
               value={email}
-              onChange={(e) => setMail(e.target.value)}
               InputLabelProps={{
                 style: { color: 'white' }
               }}
               InputProps={{
-                style: { color: 'white' }, 
+                style: { color: 'white' },
               }}
-              sx={{marginTop:"20px",color:"white"}}
+              onChange={(e) => setEmail(e.target.value)}
+              sx={{marginTop:"20px" }}
             />
             <TextField
               label="Password"
@@ -63,37 +53,36 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
               variant="outlined"
               fullWidth
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
               InputLabelProps={{
                 style: { color: 'white' }
               }}
               InputProps={{
-                style: { color: 'white' }, 
+                style: { color: 'white' },
               }}
+              onChange={(e) => setPassword(e.target.value)}
               sx={{marginTop:"20px" }}
             />
             {error && <Typography color="error">{error}</Typography>}
             <Button
-              className='button'
-              variant='contained'
+              type="submit"
+              variant="contained"
               color="primary"
               fullWidth
-              onClick={handleLogin}
-              sx={{ height: "5vh", width: "10vw", marginTop:"20px"}}
+              sx={{ height: "8vh", width: "15vw",  marginTop: "20px" }}
             >
               Login
             </Button>
-            <Typography variant="body2"  sx={{marginTop:"20px"}}>
-              Don't have an account?{' '}
-              <Link component="button" onClick={onSwitchToSignup}>
-                Sign In
-              </Link>
-            </Typography>
-          </CardContent>
-        </Card>
-      </div>
-    );
-    
-  };  
+          </form>
+          <Typography variant="body2" sx={{marginTop:"20px"}}>
+            Don't have an account?{' '}
+            <Link component="button" onClick={onSwitchToSignup}>
+              Sign Up
+            </Link>
+          </Typography>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
 
 export default Login;

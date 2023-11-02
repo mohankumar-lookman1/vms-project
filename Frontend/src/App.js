@@ -7,24 +7,29 @@ import HomePage from './Scenes/Homepage/Homepage';
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
-
-  const handleLogin = () => {
-    // Implement your authentication logic here
-    // If successful, set isAuthenticated to true
+  const [response, setResponse] = useState({ username: '', message: '' });
+  const handleLogin = (responseData) => {
     setIsAuthenticated(true);
+    setResponse({
+      username: responseData.username,
+      message: responseData.message
+    });
   };
 
-  const handleSignup = () => {
-    // Callback function to navigate to the homepage after successful signup
+  const handleSignup = (responseData) => {
     setIsAuthenticated(true);
     setShowSignup(false);
+    setResponse({
+      username: responseData.username,
+      message: responseData.message
+    });
   };
 
   return (
    
       <div>
           {isAuthenticated ? (
-            <div><HomePage /> </div>
+            <div><HomePage response={response} /></div>
           ) : showSignup ? (
             <Signup onSignup={handleSignup} onSwitchToLogin={() => setShowSignup(false)} />
           ) : (
