@@ -27,7 +27,9 @@ const App = ({ response }) => {
   }, []);
 
   // Extract the first letter of the username
-  const firstLetter = response.username ? response.username.charAt(0) : '';
+  const nameParts = response.username.split(' '); // Split by space
+  const firstLetters = nameParts.map((name) => name.charAt(0).toUpperCase()); // Extract and capitalize
+
 
 
   return (
@@ -62,9 +64,10 @@ const App = ({ response }) => {
               <Box display="flex" alignItems="center">
                 
                 {response.username && <p style={{ marginLeft: '10px', color: 'white' }}>{response.username}</p>}
-                <Avatar sx={{ color:"black" }} className="avatar">
-                {firstLetter.toUpperCase()}
+                <Avatar sx={{  color: 'black' ,cursor:"pointer"}} className="avatar">
+                 {firstLetters.join('')} {/* Combine and display */}
                 </Avatar>
+                
               </Box>
             </div>
             <List>

@@ -83,7 +83,7 @@ const Signup = ({ onSignup, onSwitchToLogin }) => {
               variant="contained"
               color="primary"
               fullWidth
-              sx={{ height: "8vh", width: "15vw",  marginTop: "20px" }}
+              sx={{ height: "6vh", width: "12vw",  marginTop: "20px" }}
             >
               Sign In
             </Button>
