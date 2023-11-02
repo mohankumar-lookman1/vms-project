@@ -2,7 +2,7 @@
   min-height: 100vh;
   max-width: 100vw;
   background-color: #151515;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .app-container {
@@ -52,6 +52,6 @@
   }
 
   .sidebar-down{
-    margin-top: 240px;
+    margin-top: 340px;
   }
  

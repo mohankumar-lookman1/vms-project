@@ -8,7 +8,7 @@ import {
   Link,
 } from '@mui/material';
 import "./styles.css";
-import { loginUser } from '../../Component/Reusable/api'; // Import the API function
+import { loginUser } from '../../Component/Global/api'; // Import the API function
 
 const Login = ({ onLogin, onSwitchToSignup }) => {
   const [email, setEmail] = useState('');

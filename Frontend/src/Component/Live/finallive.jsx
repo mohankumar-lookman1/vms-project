@@ -1,7 +1,7 @@
 import React ,{useState} from 'react';
 import { Container } from '@mui/material';
-import VideoGrid from '../Reusable/videogrid';
-import VideoGridControls from '../Reusable/videocontrol';
+import VideoGrid from '../Global/videogrid';
+import VideoGridControls from '../Global/videocontrol';
 import Form from "../form/stream"
 const App = ({videoUrls}) => {
   const [numCols, setNumCols] = useState(3);
